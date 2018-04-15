@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Ejemplos</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script type="text/javascript" src="vista/js/reportes.js"></script>
+    </head>
+
+    <body>
+
+        <div id="divDescargas" class="box">
+            <div id="reportes-slider">
+                <div id="reportes-opciones" class="slider-content">
+                    <ul>
+                        <!-- el siguiente elemento representa un grupo de elementos -->
+                        <li><a class="title">Reportes del proceso de producción de impresión</a>
+                            <!-- La siguiente lista corresponde a los elementos del grupo -->
+                            <ul>
+                                <li><label><input id="infoOrden" type="checkbox" data-args="infoOrden">Informe Órdenes de Producción</label></li>
+                                <li><label><input id="infoMensualOperarios" type="checkbox" data-args="infoMensualOperarios">Lista de Operarios</label></li>
+                                <li><label><input id="infoMensualSupervisores" type="checkbox" data-args="infoMensualSupervisores">Lista de Supervisores</label></li>
+                                <li><label><input id="infoMensualJefes" type="checkbox" data-args="infoMensualJefes">Lista de Jefes</label></li>
+                                <li><label><input id="infoDiarioOperario" type="checkbox" data-args="infoDiarioOperario">Operaciones de producción por operario</label></li>
+                                <li><label><input id="operProduccionUtilizadas" type="checkbox" data-args="operProduccionUtilizadas">Informe histórico - Tipos de producción</label></li>        
+                                <!--<li><label><input id="infoMensualOperPro" type="checkbox" data-args="infoMensualOperPro">Informe de Operaciones Producción</label></li>-->
+                                <!--<li><label><input id="actividadesXcliente" type="checkbox" data-args="actividadesXcliente">Actividades por cliente</label></li>-->
+                                <!--<li><label><input id="productividad" type="checkbox" data-args="productividad">Productividad</label></li>-->
+                            </ul>
+                        </li>
+                        <!-- Como el grupo y la lista anteriores, podríamos seguir haciendo más definiciones enseguida -->
+                    </ul>
+                </div>
+            </div>
+
+            <br>
+            <button id="reportes-generar">Generar reporte</button>
+            <button id="parcial-generar">Generar reporte parcial</button>
+
+            <br><br>
+        </div>
+
+        <div id="reportdlg-info_diario-operario" title="Operaciones de producción por Operario" style="display:none">
+            <label for="operproduccion-fechaI">Fecha Inicial:</label>
+            <input  name="fecha" id ="fechaI-info-diario-operario">
+            <label for="operproduccion-fechaF">Fecha Final:</label>
+            <input  name="fecha" id ="fechaF-info-diario-operario">
+        </div>
+
+        <div id="reportdlg-info_historico-pro" title="Informe histórico - Tipos de producción" style="display:none">
+            <label for="hisproduccion-fechaI">Fecha Inicial:</label>
+            <input  name="fecha" id ="fechaI-info-histo-pro">
+            <label for="hisproduccion-fechaF">Fecha Final:</label>
+            <input  name="fecha" id ="fechaF-info-histo-pro">
+        </div>
+
+        <div id="reportdlg-info_orden" title="Órdenes de producción" style="display:none">
+            <label for="reportdlg-info_orden">Orden:</label>
+            <input  name="orden" id ="numeroOrden">
+        </div>
+
+        <div id="reportdlg-info_operario" title="Informe de operarios" style="display:none">
+            <label for="reportdlg-operario">Nombre:</label>
+            <select id="reportdlg-operario"></select>
+        </div>
+
+        <div id="reportdlg-info_supervisor" title="Informe de supervisores" style="display:none">
+            <label for="reportdlg-supervisor">Nombre:</label>
+            <select id="reportdlg-supervisor"></select>
+        </div>
+
+        <div id="reportdlg-info_jefe" title="Informe de jefes" style="display:none">
+            <label for="reportdlg-jefe">Nombre:</label>
+            <select id="reportdlg-jefe">
+            </select>
+        </div>
+
+        <!--<div id="reportdlg-info_mes_operacion" title="Informe de operación producción" style="display:none">
+            <label for="reportdlg-operacion_operario">Operario:</label>
+            <select id="reportdlg-operacion_operario">
+            </select>
+
+        <!-- haga que esta lista se llene con jQuery teniendo en cuenta desde el mínimo año en que haya info hasta el máximo
+        <label for="reportdlg-operacion_turno">Turno:</label>
+        <select id="reportdlg-operacion_turno">
+        </select>
+
+        <label for="reportdlg-operacion_actividad">Actividad:</label>
+        <select id="reportdlg-operacion_actividad">
+        </select>
+    </div>
+
+        <!--<div id="reportdlg-info_actividad_cliente" title="Informe Actividades por cliente" style="display:none">
+            <label for="reportdlg-actividad">Actividad:</label>
+            <select id="reportdlg-actividad"></select>
+
+        <!-- haga que esta lista se llene con jQuery teniendo en cuenta desde el mínimo año en que haya info hasta el máximo
+        <label for="reportdlg-actividad_cliente">Cliente:</label>
+        <select id="reportdlg-actividad_cliente"></select>
+
+        <label for="reportdlg-actividad_fechaI">Fecha Inicio:</label>
+        <input id="reportdlg-actividad_fechaI">
+
+        <label for="reportdlg-actividad_fechaF">Fecha Final:</label>
+        <input id="reportdlg-actividad_fechaF">
+        <!-- falta organizar 
+
+    </div>
+        
+
+        <div id="reportdlg-info_productividad" title="Informe de productividad" style="display:none">
+            <label for="reportdlg-produc_maquina">Máquina:</label>
+            <select id="reportdlg-produc_maquina"></select>
+
+        <!-- haga que esta lista se llene con jQuery teniendo en cuenta desde el mínimo año en que haya info hasta el máximo 
+        <label for="reportdlg-produc_fecha">Fecha:</label>
+        <input id="reportdlg-produc_fecha">
+
+        <label for="reportdlg-produc_cliente">Cliente:</label>
+        <select id="reportdlg-produc_cliente"></select>
+
+        <label for="reportdlg-produc_actividad">Actividad:</label>
+        <select id="reportdlg-produc_actividad"></select>
+    </div>
+        -->
+    </body>
+</html>
